@@ -3,3 +3,9 @@ authors = ["Leonard Schüngel"]
 language = "en"
 src = "src"
 title = "Layouting in egui"
+
+[output.html]
+additional-css = ["src/custom.css"]
+
+[preprocessor.egui-preproc]
+command = "./egui-preproc/target/debug/egui-preproc.exe"

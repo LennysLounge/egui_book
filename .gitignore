@@ -1,1 +1,4 @@
 book
+target
+/.vscode
+Cargo.lock
