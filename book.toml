@@ -1,0 +1,5 @@
+[book]
+authors = ["Leonard Schüngel"]
+language = "en"
+src = "src"
+title = "Layouting in egui"
