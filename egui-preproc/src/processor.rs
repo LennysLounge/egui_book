@@ -1,11 +1,13 @@
 use std::fs::OpenOptions;
 use std::io::Write;
+use std::process::{Command, Stdio};
 
+use anyhow::Error;
 use chrono::Local;
-use mdbook::book::Chapter;
+use mdbook::book::{Book, Chapter};
+use mdbook::preprocess::{Preprocessor, PreprocessorContext};
 use regex::Regex;
-
-use super::*;
+use tracing::info;
 
 /// A no-op preprocessor.
 pub struct EguiPreproc;
@@ -48,10 +50,57 @@ fn process_chapter(chapter: &mut Chapter) {
     let re = Regex::new(r"\{\{sample: (.*)\}\}").expect("Regex should compile");
     chapter.content = re
         .replace_all(&chapter.content, |caps: &regex::Captures| {
-            log(&format!("found group {}", &caps[1]));
-            format!("This is sample: {}", &caps[1])
+            let sample_name = &caps[1];
+
+            info!("Compiling sample: {sample_name}");
+
+            Command::new("cargo")
+                .args([
+                    "build",
+                    "--manifest-path",
+                    "./rust/Cargo.toml",
+                    "--bin",
+                    sample_name,
+                    "--release",
+                    "--target",
+                    "wasm32-unknown-unknown",
+                ])
+                .stdout(Stdio::inherit())
+                .stderr(Stdio::inherit())
+                .output()
+                .expect("Cargo build failed to start");
+
+            info!("Running wasm-bindgen");
+
+            Command::new("wasm-bindgen")
+                .args([
+                    &format!("./rust/target/wasm32-unknown-unknown/release/{sample_name}.wasm"),
+                    "--target",
+                    "web",
+                    "--out-dir",
+                    "./src/wasm",
+                    "--no-typescript",
+                ])
+                .stdout(Stdio::inherit())
+                .stderr(Stdio::inherit())
+                .output()
+                .expect("Cannot run wasm-bindgen");
+            info!("Done running wasm-bindgen, printing output now");
+
+            format!(
+                "
+<canvas id='the_canvas_id' class='egui-sample'></canvas>
+<script type='module'>
+    import init from './wasm/{sample_name}.js';
+    async function run(){{
+        await init();
+    }}
+    run();
+</script>"
+            )
         })
         .to_string();
+    info!("done processing chapter {}", chapter.name);
 }
 
 #[allow(unused)]

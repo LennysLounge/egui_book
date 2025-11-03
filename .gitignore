@@ -2,3 +2,4 @@ book
 target
 /.vscode
 Cargo.lock
+/src/wasm

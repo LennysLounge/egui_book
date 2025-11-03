@@ -3,15 +3,6 @@
 Hello im an mdbook
 
 
-{{sample: sample_name}}
-
-<canvas id="the_canvas_id" class="egui-sample"></canvas>
-<script type="module">
-    import init from './rust.js';
-    async function run(){
-        await init();
-    }
-    run();
-</script>
+{{sample: hello_world}}
 
 ## Im a sub heading?

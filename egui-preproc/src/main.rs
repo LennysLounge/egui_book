@@ -1,9 +1,8 @@
 mod processor;
 
 use clap::{Arg, ArgMatches, Command};
-use mdbook::book::Book;
 use mdbook::errors::Error;
-use mdbook::preprocess::{CmdPreprocessor, Preprocessor, PreprocessorContext};
+use mdbook::preprocess::{CmdPreprocessor, Preprocessor};
 use semver::{Version, VersionReq};
 use std::io;
 use std::process;
@@ -21,6 +20,11 @@ pub fn make_app() -> Command {
 }
 
 fn main() {
+    tracing_subscriber::fmt()
+        .with_writer(io::stderr)
+        .with_target(false)
+        .init();
+
     let matches = make_app().get_matches();
 
     // Users will want to construct their own preprocessor here
