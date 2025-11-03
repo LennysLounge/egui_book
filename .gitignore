@@ -3,3 +3,4 @@ target
 /.vscode
 Cargo.lock
 /src/wasm
+/rust/.vscode/settings.json

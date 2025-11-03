@@ -89,7 +89,7 @@ fn process_chapter(chapter: &mut Chapter) {
 
             format!(
                 "
-<canvas id='the_canvas_id' class='egui-sample'></canvas>
+<canvas id='{sample_name}' class='egui-sample'></canvas>
 <script type='module'>
     import init from './wasm/{sample_name}.js';
     async function run(){{
