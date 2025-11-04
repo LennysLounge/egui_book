@@ -7,7 +7,7 @@ where
     T: App + 'static,
 {
     let options = eframe::NativeOptions {
-        viewport: eframe::egui::ViewportBuilder::default().with_inner_size([320.0, 240.0]),
+        viewport: eframe::egui::ViewportBuilder::default(),
         ..Default::default()
     };
 

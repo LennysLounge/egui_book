@@ -91,7 +91,7 @@ fn process_chapter(chapter: &mut Chapter) {
                 "
 <canvas id='{sample_name}' class='egui-sample'></canvas>
 <script type='module'>
-    import init from './wasm/{sample_name}.js';
+    import init from '/wasm/{sample_name}.js';
     async function run(){{
         await init();
     }}
