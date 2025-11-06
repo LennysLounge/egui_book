@@ -10,3 +10,6 @@
     - [Playground](./simple_layouts/layout/playground.md)
 - [Manual layouting](./manual_layouting.md)
 - [Complex layouting](./complex_layouting.md)
+- [Widget](./widget.md)
+
+- [Notepad](./notepad.md)
