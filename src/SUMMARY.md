@@ -11,5 +11,7 @@
 - [Manual layouting](./manual_layouting.md)
 - [Complex layouting](./complex_layouting.md)
 - [Widget](./widget.md)
+- [How layouting works](./how_layouting_works.md)
+  - [Allocating space](./how_layouting_works/allocating_space.md)
 
 - [Notepad](./notepad.md)

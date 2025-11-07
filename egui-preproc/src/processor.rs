@@ -130,13 +130,13 @@ fn should_compile(sample_name: &str, chapter_last_modified: &DateTime<Utc>) -> b
     let wasm_path = output_path.join(format!("{sample_name}_bg.wasm"));
     if !fs::exists(&wasm_path).is_ok_and(|t| t) {
         info!("file '{wasm_path:?}' does not exist, need to compile");
-        return false;
+        return true;
     }
 
     let js_path = output_path.join(format!("{sample_name}.js"));
     if !fs::exists(&js_path).is_ok_and(|t| t) {
         info!("file '{js_path:?}' does not exist, need to compile");
-        return false;
+        return true;
     }
 
     let wasm_last_modified = last_modified_of(wasm_path);

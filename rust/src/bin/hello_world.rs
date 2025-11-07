@@ -9,21 +9,16 @@ mod common;
 fn main() {
     common::run_app(&|cc| {
         cc.egui_ctx.set_theme(ThemePreference::Dark);
-        MyApp::default()
+        MyApp{
+            name: "Arthur".to_owned(),
+            age: 42,
+        }
     });
 }
 
 struct MyApp {
     name: String,
     age: i32,
-}
-impl Default for MyApp {
-    fn default() -> Self {
-        Self {
-            name: "Arthur".to_owned(),
-            age: 42,
-        }
-    }
 }
 impl App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
