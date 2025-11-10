@@ -13,5 +13,9 @@
 - [Widget](./widget.md)
 - [How layouting works](./how_layouting_works.md)
   - [Allocating space](./how_layouting_works/allocating_space.md)
+- [Ui](./ui/ui.md)
+  - [Minimum size](./ui/minimum_size.md)
+  - [Maximum size](./ui/maximum_size.md)
+  - [Creating Ui's](./ui/creating_uis.md)
 
 - [Notepad](./notepad.md)
